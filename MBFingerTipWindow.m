@@ -311,26 +311,27 @@
     if ([touchView isFadingOut])
         return;
         
-    BOOL animationsWereEnabled = [UIView areAnimationsEnabled];
-
-    if (animated)
-    {
+    if (animated) {
+        BOOL animationsWereEnabled = [UIView areAnimationsEnabled];
         [UIView setAnimationsEnabled:YES];
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:self.fadeDuration];
-    }
-
-    touchView.frame = CGRectMake(touchView.center.x - touchView.frame.size.width, 
-                                 touchView.center.y - touchView.frame.size.height, 
-                                 touchView.frame.size.width  * 2, 
-                                 touchView.frame.size.height * 2);
-    
-    touchView.alpha = 0.0;
-
-    if (animated)
-    {
-        [UIView commitAnimations];
+        [UIView animateWithDuration:self.fadeDuration
+                         animations:^
+         {
+            touchView.frame = CGRectMake(touchView.center.x - touchView.frame.size.width,
+                                         touchView.center.y - touchView.frame.size.height,
+                                         touchView.frame.size.width  * 2,
+                                         touchView.frame.size.height * 2);
+            
+            touchView.alpha = 0.0;
+        }];
         [UIView setAnimationsEnabled:animationsWereEnabled];
+    } else {
+        touchView.frame = CGRectMake(touchView.center.x - touchView.frame.size.width,
+                                     touchView.center.y - touchView.frame.size.height,
+                                     touchView.frame.size.width  * 2,
+                                     touchView.frame.size.height * 2);
+        
+        touchView.alpha = 0.0;
     }
     
     touchView.fadingOut = YES;
