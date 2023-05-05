@@ -26,19 +26,19 @@ class FingerTipOverlayWindow: UIWindow {
 @objc (MBXFingerTipWindow)
 public class FingerTipWindow: UIWindow {
 
-    public static var fingerTipWindow: FingerTipWindow? {
+    @objc public static var fingerTipWindow: FingerTipWindow? {
         return UIApplication.shared.windows.compactMap({ $0 as? FingerTipWindow }).first
     }
 
-    public var touchAlpha: CGFloat         = 0.5
-    public var fadeDuration: TimeInterval  = 0.3
-    public var strokeColor: UIColor        = .black
-    public var fillColor: UIColor          = .white
+    @objc public var touchAlpha: CGFloat         = 0.5
+    @objc public var fadeDuration: TimeInterval  = 0.3
+    @objc public var strokeColor: UIColor        = .black
+    @objc public var fillColor: UIColor          = .white
 
     private var active: Bool = false
 
     // if set to 'true' the touches are shown even when no external screen is connected
-    public var alwaysShowTouches: Bool = false {
+    @objc public var alwaysShowTouches: Bool = false {
         didSet {
             if oldValue != alwaysShowTouches {
                 updateFingertipsAreActive()
